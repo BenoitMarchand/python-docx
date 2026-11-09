@@ -138,13 +138,14 @@ Branches: `master` (releases), `develop`, plus `feature/*` branches upstream.
 ### This clone's fork workflow
 - Remotes: `origin` = fork https://github.com/BenoitMarchand/python-docx (push here),
   `upstream` = python-openxml/python-docx (fetch only; push URL is set to `DISABLED`).
-- `master` mirrors `upstream/master` – never commit on it. Sync with
-  `git fetch upstream && git switch master && git merge --ff-only upstream/master && git push`.
-- One topic branch per change, created from `master` (e.g. `fix/1638-zero-margin-width`),
-  so each can be proposed upstream as a standalone PR (`gh pr create -R python-openxml/python-docx`).
-- `main-bm` = integration branch merging the topic branches; this is what own projects
-  install: `pip install git+https://github.com/BenoitMarchand/python-docx@main-bm`.
-- Fork-only changes (like this file) go on `main-bm`, never in branches meant for upstream.
+- `master` = upstream `master` + fork-only files (like this CLAUDE.md). Sync with
+  `git fetch upstream && git switch master && git merge upstream/master && git push`.
+- One topic branch per change, created from **`upstream/master`** (not from `master`, so
+  fork-only files never leak into upstream PRs):
+  `git fetch upstream && git switch -c fix/1638-zero-margin-width upstream/master`.
+  Each can then be proposed upstream as a standalone PR (`gh pr create -R python-openxml/python-docx`).
+- `main-bm` = integration branch: `master` + the merged topic branches; this is what own
+  projects install: `pip install git+https://github.com/BenoitMarchand/python-docx@main-bm`.
 
 ## Upstream context (GitHub issues, Nov 2026)
 
