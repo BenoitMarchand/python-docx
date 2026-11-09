@@ -8,3 +8,6 @@
 _scratch/
 Session.vim
 /.tox/
+
+# -- integration test output (generated) --
+integration/output/
